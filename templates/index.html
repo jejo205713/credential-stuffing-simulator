@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Credential Stuffing Simulator</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <div class="page-wrapper">
+
+    <header>
+      <div class="badge">EDUCATIONAL USE ONLY</div>
+      <h1>Credential Stuffing<br /><span>Simulator</span></h1>
+      <p class="subtitle">A controlled environment to understand how credential stuffing attacks work — and how to defend against them.</p>
+    </header>
+
+    <main>
+
+      <!-- Info Cards -->
+      <section class="info-grid">
+        <div class="info-card">
+          <div class="info-icon">⚠</div>
+          <div class="info-label">Rate Limit</div>
+          <div class="info-value">5 req/sec</div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">🔒</div>
+          <div class="info-label">Lockout After</div>
+          <div class="info-value">3 failures</div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">👤</div>
+          <div class="info-label">Mock Users</div>
+          <div class="info-value">8 accounts</div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">⏱</div>
+          <div class="info-label">Delay/Attempt</div>
+          <div class="info-value">200 ms</div>
+        </div>
+      </section>
+
+      <!-- Reference Panel -->
+      <section class="reference-panel">
+        <div class="ref-header">
+          <span>📋 Mock User Database (for reference)</span>
+          <button id="toggleRef" onclick="toggleReference()">Hide</button>
+        </div>
+        <div id="refBody" class="ref-body">
+          <table>
+            <thead><tr><th>Username</th><th>Password</th></tr></thead>
+            <tbody>
+              <tr><td>user1</td><td>123456</td></tr>
+              <tr><td>admin</td><td>admin123</td></tr>
+              <tr><td>jejo</td><td>securepass</td></tr>
+              <tr><td>alice</td><td>password1</td></tr>
+              <tr><td>bob</td><td>qwerty99</td></tr>
+              <tr><td>charlie</td><td>letmein</td></tr>
+              <tr><td>diana</td><td>sunshine</td></tr>
+              <tr><td>root</td><td>toor</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Input Area -->
+      <section class="input-section">
+        <div class="input-header">
+          <label for="credInput">Leaked Credentials Input</label>
+          <span class="format-hint">Format: username:password (one per line)</span>
+        </div>
+        <textarea id="credInput" placeholder="user1:123456&#10;admin:wrongpass&#10;jejo:securepass&#10;alice:badpass&#10;bob:badpass&#10;bob:badpass&#10;bob:qwerty99"></textarea>
+        <div class="sample-btns">
+          <button class="btn-outline" onclick="loadSample()">Load Sample</button>
+          <button class="btn-outline" onclick="clearInput()">Clear</button>
+        </div>
+      </section>
+
+      <!-- Action Buttons -->
+      <div class="action-row">
+        <button id="simulateBtn" class="btn-primary" onclick="runSimulation()">
+          <span id="btnText">▶ Run Simulation</span>
+          <span id="btnSpinner" class="spinner hidden"></span>
+        </button>
+        <button class="btn-secondary" onclick="resetAccounts()">↺ Reset Accounts</button>
+      </div>
+
+      <!-- Progress -->
+      <div id="progressBar" class="progress-container hidden">
+        <div class="progress-label">
+          <span id="progressText">Simulating...</span>
+          <span id="progressCount">0 / 0</span>
+        </div>
+        <div class="progress-track">
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <section id="summarySection" class="summary-section hidden">
+        <h2>Attack Summary</h2>
+        <div class="summary-grid">
+          <div class="summary-card">
+            <div class="s-value" id="sTotalAttempts">0</div>
+            <div class="s-label">Total Attempts</div>
+          </div>
+          <div class="summary-card success-card">
+            <div class="s-value" id="sSuccessful">0</div>
+            <div class="s-label">Compromised</div>
+          </div>
+          <div class="summary-card">
+            <div class="s-value" id="sFailed">0</div>
+            <div class="s-label">Failed</div>
+          </div>
+          <div class="summary-card locked-card">
+            <div class="s-value" id="sLocked">0</div>
+            <div class="s-label">Locked Out</div>
+          </div>
+          <div class="summary-card rate-card">
+            <div class="s-value" id="sRate">0%</div>
+            <div class="s-label">Success Rate</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Results -->
+      <section id="resultsSection" class="results-section hidden">
+        <div class="results-header">
+          <h2>Attempt Log</h2>
+          <div class="legend">
+            <span class="dot dot-success"></span> Compromised
+            <span class="dot dot-failed"></span> Failed
+            <span class="dot dot-locked"></span> Locked
+          </div>
+        </div>
+        <div class="results-panel" id="resultsPanel"></div>
+      </section>
+
+    </main>
+
+    <footer>
+      <p>⚠ This tool is for <strong>educational purposes only</strong>. Do not use against real systems without explicit authorization. Understanding attacks helps build better defenses.</p>
+    </footer>
+
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
