@@ -1,4 +1,4 @@
-# 🔐 Credential Stuffing Simulator
+# 🛡️ Credential Stuffing Simulator
 
 > A controlled, educational web application that simulates credential stuffing attacks against a mock authentication system — built to understand how attackers exploit reused passwords and how defenders can stop them.
 
@@ -106,22 +106,14 @@ The app ships with 8 hardcoded test accounts:
 
 ## 🖥️ Gallery
 
-> Screenshots are included below. Add your own screenshots by replacing the placeholder paths.
+### Home Screen
+![Home Screen](https://raw.githubusercontent.com/jejo205713/credential-stuffing-simulator/main/Images/homescreen.png)
 
-### Main Interface
-![Main Interface](docs/screenshots/main.png)
+### Credential Input
+![Credential Input](https://raw.githubusercontent.com/jejo205713/credential-stuffing-simulator/main/Images/credential-input.png)
 
-### Credentials Input
-![Credentials Input](docs/screenshots/input.png)
-
-### Simulation in Progress
-![Simulation Progress](docs/screenshots/progress.png)
-
-### Attack Results — Summary
-![Summary](docs/screenshots/summary.png)
-
-### Attack Results — Attempt Log
-![Attempt Log](docs/screenshots/results.png)
+### Attack Simulation Results
+![Attack Simulation Results](https://raw.githubusercontent.com/jejo205713/credential-stuffing-simulator/main/Images/attack-simulation-results.png)
 
 ---
 
